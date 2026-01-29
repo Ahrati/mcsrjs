@@ -35,6 +35,8 @@ namespace mcsr {
     export var safe: typeof result.safe;
     export var unsafe: typeof result.unsafe;
     export var fetchJSON: typeof fetch.fetchJSON;
+    export var formatTime: typeof util.formatTime;
+    export var formatDate: typeof util.formatDate;
 }
 
 export default mcsr;
