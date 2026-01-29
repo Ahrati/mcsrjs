@@ -1,0 +1,30 @@
+{
+  "name": "mcsrjs",
+  "version": "0.2.0",
+  "description": "JS/TS module for MCSR API",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc"
+  },
+  "author": "Ahrati",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.10",
+    "rimraf": "^6.1.2"
+  }
+}
