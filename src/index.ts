@@ -1,6 +1,8 @@
 import { MCSR } from "./client/mcsr.js";
 import * as types from './types/index.js'
 import * as util from './util/index.js'
+import * as result from './client/result.js'
+import * as fetch from './client/fetch.js'
 
 function mcsr(options?: types.ClientOptions) : MCSR {
     return new MCSR(options);
@@ -27,8 +29,12 @@ namespace mcsr {
     export interface RaceLeaderboardData extends types.RaceLeaderboardData {}
     export interface PhaseLeaderboardData extends types.PhaseLeaderboardData {}
     export interface EloLeaderboardData extends types.EloLeaderboardData {}
+    export type Result<T> = result.Result<T>;
 
     export var eloToRank: typeof util.eloToRank;
+    export var safe: typeof result.safe;
+    export var unsafe: typeof result.unsafe;
+    export var fetchJSON: typeof fetch.fetchJSON;
 }
 
 export default mcsr;
