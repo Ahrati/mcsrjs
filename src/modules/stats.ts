@@ -31,6 +31,9 @@ export class StatsModule {
         identifer: UserIdentifier,
         options?: EndpointParameterOptions
     ) : Promise<UserStats> {
+        /*
+            Constructs user statistics from the past 50 games played
+        */
         throw new mcsrjsError("not implemented");
     }
 

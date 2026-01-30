@@ -1,4 +1,5 @@
-import { UserProfile } from "./user.js";
+import { MatchSeed, NetherType, OverworldType } from "./match.js";
+import { UserProfile, UserStatistics } from "./user.js";
 
 export type VersusResultMap = {
   total: number;
@@ -29,7 +30,22 @@ export interface VersusStats {
 }
 
 export interface UserStats {
+  statistics: UserStatistics;
+  averageTimes: SplitTimes;
+  bestTimes: SplitTimes;
+  bestSeeds: {
+    overworld: OverworldType;
+    nether: NetherType;
+  }
+}
 
+export type SplitTimes = {
+  overworld: number | null;
+  bastion: number | null;
+  fortress: number | null;
+  blind: number | null;
+  stronghold: number | null;
+  end: number | null;
 }
 
 export interface UserSeasonResultData {

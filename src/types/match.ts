@@ -22,6 +22,7 @@ export interface MatchInfo {
     seedType: string | null;
     bastionType: string | null;
     tag: string | null;
+    /* advanced */
     completions: Completion[];
     timelines: Timeline[];
     replayExist: boolean;
@@ -40,11 +41,28 @@ export type Timeline = {
 
 export interface MatchSeed {
     id: MatchID | null;
-    overworld: string | null;
-    nether: string | null;
+    overworld: OverworldType | null;
+    nether: NetherType | null;
     endTowers: number[];
     variations: string[];
 }
+
+export const OverworldType = {
+    VILLAGE: 'VILLAGE',
+    RUINED_PORTAL: 'RUINED_PORTAL',
+    SHIPWRECK: 'SHIPWRECK',
+    DESERT_TEMPLE: 'DESERT_TEMPLE',
+    BURIED_TREASURE: 'BURIED_TREASURE'
+} as const;
+export type OverworldType = typeof OverworldType[keyof typeof OverworldType];
+
+export const NetherType = {
+    STABLES: 'STABLES',
+    TREASURE: 'TREASURE',
+    BRIDGE: 'BRIDGE',
+    HOUSING: 'HOUSING'
+} as const;
+export type NetherType = typeof NetherType[keyof typeof NetherType];
 
 export const MatchType = {
     CASUAL: 1,
@@ -105,6 +123,6 @@ export const TimelineType = {
     STRONGHOLD: 'story.follow_ender_eye',
     ENTER_END: 'story.enter_the_end',
     DRAGON_BREATH: 'end.dragon_breath',
-    KILL_DRAGON: 'end.kill_dragon',
+    KILL_DRAGON: 'end.kill_dragon'
 } as const;
 export type TimelineType = typeof TimelineType[keyof typeof TimelineType];

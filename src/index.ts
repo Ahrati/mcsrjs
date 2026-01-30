@@ -4,19 +4,18 @@ import * as util from './util/index.js'
 import * as result from './client/result.js'
 import * as fetch from './client/fetch.js'
 
-function mcsr(options?: types.ClientOptions) : MCSR {
-    return new MCSR(options);
+export function mcsrjs(
+    options?: types.ClientOptions
+) : MCSR {
+        return new MCSR(options);
 }
-
-namespace mcsr {
+export namespace mcsrjs {
     export interface Achievement extends types.Achievement {}
     export interface LiveData extends types.LiveData {}
     export interface LiveMatchData extends types.LiveMatchData {}
     export interface MatchInfo extends types.MatchInfo {}
     export type MatchID = types.MatchID;
     export interface MatchSeed extends types.MatchSeed {}
-    export type MatchType = types.MatchType;
-    export type TimelineType = types.TimelineType;
     export interface FetchOptions extends types.FetchOptions {}
     export interface ClientOptions extends types.ClientOptions {}
     export interface EndpointParameterOptions extends types.EndpointParameterOptions {}
@@ -37,6 +36,15 @@ namespace mcsr {
     export var fetchJSON: typeof fetch.fetchJSON;
     export var formatTime: typeof util.formatTime;
     export var formatDate: typeof util.formatDate;
+
+    export type MatchType = types.MatchType;
+    export var MatchType = types.MatchType;
+    export type OverworldType = types.OverworldType;
+    export var OverworldType = types.OverworldType;
+    export type NetherType = types.NetherType;
+    export var NetherType = types.NetherType;
+    export type TimelineType = types.TimelineType;
+    export var TimelineType = types.TimelineType;
 }
 
-export default mcsr;
+export default mcsrjs;
