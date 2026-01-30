@@ -1,6 +1,6 @@
 {
   "name": "mcsrjs",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "JS/TS module for MCSR API",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,9 @@
   },
   "typesVersions": {
     "*": {
-      "types": ["dist/types/index.d.ts"]
+      "types": [
+        "dist/types/index.d.ts"
+      ]
     }
   },
   "files": [
