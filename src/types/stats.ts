@@ -34,8 +34,8 @@ export interface UserStats {
   averageTimes: SplitTimes;
   bestTimes: SplitTimes;
   bestSeeds: {
-    overworld: OverworldType;
-    nether: NetherType;
+    overworld: OverworldType | null;
+    nether: NetherType | null;
   }
 }
 

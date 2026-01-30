@@ -1,3 +1,4 @@
+import { Timeline, TimelineType } from '../types/match.js';
 import { RankTier } from '../types/other.js';
 import { VersusData, VersusStats } from '../types/stats.js';
 const rankTiers: RankTier[] = [
@@ -24,14 +25,18 @@ const rankTiers: RankTier[] = [
     { name: "Netherite", min: 2000, max: Infinity },
 ];
 
-export function eloToRank(elo: number | null) : string {
+export function eloToRank(
+    elo: number | null
+) : string {
     if (!elo || elo < 0) return "Unknown";
 
     const rank = rankTiers.find(r => elo >= r.min && elo <= r.max);
     return rank ? rank.name : "Unknown";
 }
 
-export function versusStats(data: VersusData) : VersusStats{
+export function versusStats(
+    data: VersusData
+) : VersusStats{
 
     var stats: VersusStats = {};
     stats[data.players[0].nickname] = {
@@ -49,7 +54,9 @@ export function versusStats(data: VersusData) : VersusStats{
     return stats;
 }
 
-export function formatTime(time: number) : string {
+export function formatTime(
+    time: number
+) : string {
     const totalSeconds = Math.floor(time / 1000);
     const ms = Math.floor((time % 1000) / 10); // 2-digit ms
 
@@ -63,7 +70,9 @@ export function formatTime(time: number) : string {
     return `${minutes}:${seconds}.${ms.toString().padStart(2, "0")}`;
 }
 
-export function formatDate(date: number) : string {
+export function formatDate(
+    date: number
+) : string {
     var d = new Date(date * 1000);
     const formatted = d.toLocaleString("en-GB", {
         weekday: "short",
@@ -76,4 +85,10 @@ export function formatDate(date: number) : string {
         hour12: false
     });
     return formatted;
+}
+
+export function timeOf(
+    timelines: Timeline[], type: TimelineType
+) : number | undefined {
+    return timelines.find(t => t.type == type)?.time;
 }

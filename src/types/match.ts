@@ -19,8 +19,8 @@ export interface MatchInfo {
     beginner: boolean;
     botSource: null; // not sure
     date: number;
-    seedType: string | null;
-    bastionType: string | null;
+    seedType: OverworldType | null;
+    bastionType: NetherType | null;
     tag: string | null;
     /* advanced */
     completions: Completion[];

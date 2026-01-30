@@ -30,12 +30,13 @@ export namespace mcsrjs {
     export interface EloLeaderboardData extends types.EloLeaderboardData {}
     export type Result<T> = result.Result<T>;
 
-    export var eloToRank: typeof util.eloToRank;
-    export var safe: typeof result.safe;
-    export var unsafe: typeof result.unsafe;
-    export var fetchJSON: typeof fetch.fetchJSON;
-    export var formatTime: typeof util.formatTime;
-    export var formatDate: typeof util.formatDate;
+    export var eloToRank: typeof util.eloToRank = util.eloToRank;
+    export var safe: typeof result.safe = result.safe;
+    export var unsafe: typeof result.unsafe = result.unsafe;
+    export var fetchJSON: typeof fetch.fetchJSON = fetch.fetchJSON;
+    export var formatTime: typeof util.formatTime = util.formatTime;
+    export var formatDate: typeof util.formatDate = util.formatDate;
+    export var timeOf: typeof util.timeOf = util.timeOf;
 
     export type MatchType = types.MatchType;
     export var MatchType = types.MatchType;

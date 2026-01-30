@@ -27,7 +27,7 @@ export class MCSR {
         this.live = new LiveEndpoint(options);
         this.leaderboard = new LeaderboardEndpoint(options);
 
-        this.stats = new StatsModule(this.users); //wip
+        this.stats = new StatsModule(this.users, this.matches); //wip
     
         this.populateData();
     }
