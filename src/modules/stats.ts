@@ -7,6 +7,7 @@ import { UsersEndpoint } from "../endpoints/users.js";
 import { MatchInfo, MatchType, NetherType, OverworldType, Timeline, TimelineType } from "../types/match.js";
 import { MatchesEndpoint } from "../endpoints/matches.js";
 import { timeOf } from "../util/util.js";
+import { setParams } from "../client/fetch.js";
 
 
 // WIP experimental
@@ -21,14 +22,12 @@ export class StatsModule {
         player_one: UserIdentifier,
         player_two: UserIdentifier,
         options: EndpointParameterOptions = {}
-    ) : Promise<VersusData> {
-        const {
-            season
-        } = options;
-        
-        const params = new URLSearchParams();
-        if (season !== undefined) params.append("season", String(season));
-        return this.userClient.request<VersusData>(`/users/${player_one}/versus/${player_two}?${params.toString()}`)
+    ) : Promise<VersusData> {     
+        const params = setParams(
+            ['season'],
+            options
+        );
+        return this.userClient.request<VersusData>(`/users/${player_one}/versus/${player_two}?${params}`)
     }
 
     async player( // yucky need to fix later

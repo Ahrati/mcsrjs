@@ -1,4 +1,5 @@
 import { Client } from "../client/client.js";
+import { setParams } from "../client/fetch.js";
 import { ClientOptions, EndpointParameterOptions } from "../types/options.js";
 import { EloLeaderboardData,  PhaseLeaderboardData, RaceLeaderboardData, RecordLeaderboardDataEntry } from "../types/user.js";
 
@@ -12,45 +13,31 @@ export class LeaderboardEndpoint extends Client {
     elo(
         options: EndpointParameterOptions = {}
     ) : Promise<EloLeaderboardData> {
-        const {
-            season,
-            country
-        } = options;
-
-        const params = new URLSearchParams();
-        if (season !== undefined) params.append("season", String(season));
-        if (country !== undefined) params.append("country", country);
-        return this.request<EloLeaderboardData>(`/leaderboard?${params.toString()}`);
+        const params = setParams(
+            ['season', 'country'],
+            options
+        );
+        return this.request<EloLeaderboardData>(`/leaderboard?${params}`);
     }
 
     phase(
         options: EndpointParameterOptions = {}
     ) : Promise<PhaseLeaderboardData> {
-        const {
-            season,
-            country,
-            predicted
-        } = options;
-
-        const params = new URLSearchParams();
-        if (season !== undefined) params.append("season", String(season));
-        if (country !== undefined) params.append("country", country);
-        if (predicted !== undefined) params.append("predicted", String(predicted));
-        return this.request<PhaseLeaderboardData>(`/phase-leaderboard?${params.toString()}`);
+        const params = setParams(
+            ['season', 'country', 'predicted'],
+            options
+        );
+        return this.request<PhaseLeaderboardData>(`/phase-leaderboard?${params}`);
     }
 
     record(
         options: EndpointParameterOptions = {}
     ) : Promise<RecordLeaderboardDataEntry[]> {
-        const {
-            season,
-            distinct
-        } = options;
-
-        const params = new URLSearchParams();
-        if (season !== undefined) params.append("season", String(season));
-        if (distinct !== undefined) params.append("distinct", String(distinct));
-        return this.request<RecordLeaderboardDataEntry[]>(`/record-leaderboard?${params.toString()}`);
+        const params = setParams(
+            ['season', 'distinct'],
+            options
+        );
+        return this.request<RecordLeaderboardDataEntry[]>(`/record-leaderboard?${params}`);
     }
 
     race(

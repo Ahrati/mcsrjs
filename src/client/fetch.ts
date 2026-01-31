@@ -1,5 +1,5 @@
 import { mcsrjsError } from "./error.js";
-import { FetchOptions } from "../types/options.js";
+import { EndpointParameterOptions, FetchOptions } from "../types/options.js";
 
 const sleep = (
     ms: number
@@ -62,4 +62,25 @@ export async function fetchJSON<T>(
     }
 
     throw lastError instanceof Error ? lastError : new mcsrjsError("Unknown fetch Error");
+}
+
+export function buildParams( params : any ) : URLSearchParams {
+    const _params = new URLSearchParams();
+    for(let key in params) {
+        if(params[key] !== undefined) _params.append(key, String(params[key]));
+    }
+    return _params
+}
+
+export function setParams( keys: (keyof EndpointParameterOptions)[], options: EndpointParameterOptions ) : string {
+    const params: Partial<EndpointParameterOptions> = {};
+    for(let key of keys) {
+        params[key] = options[key];
+    }
+
+    return buildParams(params).toString();
+}
+
+export function buildHeader() {
+
 }

@@ -17,7 +17,7 @@ export class MCSR {
     
     //Data
     private m_season!: number;
-
+    private m_players!: number;
 
     constructor(
         options?: ClientOptions
@@ -29,16 +29,22 @@ export class MCSR {
 
         this.stats = new StatsModule(this.users, this.matches); //wip
     
-        this.populateData();
+        this.refresh();
     }
 
-    private async populateData(
+    public async refresh(
     ) {
         this.m_season = (await this.leaderboard.elo()).season.number;;
+        this.m_players = (await this.live.get()).players;
     }
 
     get current_season(
     ) : number {
         return this.m_season;
+    }
+
+    get online_players(
+    ) : number {
+        return this.m_players;
     }
 }

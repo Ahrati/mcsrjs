@@ -1,5 +1,6 @@
 import { Achievement } from "./achievement.js";
 import { MatchSeed } from "./match.js";
+
 export type UserIdentifier = string; // uuid, nickname or discord.[snowflake]
 
 export interface UserProfile {

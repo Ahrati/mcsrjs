@@ -29,6 +29,7 @@ export namespace mcsrjs {
     export interface PhaseLeaderboardData extends types.PhaseLeaderboardData {}
     export interface EloLeaderboardData extends types.EloLeaderboardData {}
     export type Result<T> = result.Result<T>;
+    export type UserIdentifier = types.UserIdentifier;
 
     export var eloToRank: typeof util.eloToRank = util.eloToRank;
     export var safe: typeof result.safe = result.safe;
