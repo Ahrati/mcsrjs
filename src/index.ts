@@ -30,14 +30,19 @@ export namespace mcsrjs {
     export interface EloLeaderboardData extends types.EloLeaderboardData {}
     export type Result<T> = result.Result<T>;
     export type UserIdentifier = types.UserIdentifier;
+    export interface PrivateLiveMatchData extends types.PrivateLiveMatchData {};
+    export interface UserSeasonResultData extends types.UserSeasonResultData {};
 
-    export var eloToRank: typeof util.eloToRank = util.eloToRank;
-    export var safe: typeof result.safe = result.safe;
-    export var unsafe: typeof result.unsafe = result.unsafe;
-    export var fetchJSON: typeof fetch.fetchJSON = fetch.fetchJSON;
-    export var formatTime: typeof util.formatTime = util.formatTime;
-    export var formatDate: typeof util.formatDate = util.formatDate;
-    export var timeOf: typeof util.timeOf = util.timeOf;
+    export var eloToRank = util.eloToRank;
+    export var safe = result.safe;
+    export var unsafe = result.unsafe;
+    export var fetchJSON = fetch.fetchJSON;
+    export var formatTime = util.formatTime;
+    export var formatDate = util.formatDate;
+    export var timeOf = util.timeOf;
+    export var epoch = util.epoch;
+    export var findByDate = util.findByDate;
+    export var findByKey = util.findByKey;
 
     export type MatchType = types.MatchType;
     export var MatchType = types.MatchType;
@@ -47,6 +52,8 @@ export namespace mcsrjs {
     export var NetherType = types.NetherType;
     export type TimelineType = types.TimelineType;
     export var TimelineType = types.TimelineType;
+    export type MatchStatus = types.MatchStatus;
+    export var MatchStatus = types.MatchStatus;
 }
 
 export default mcsrjs;

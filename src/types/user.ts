@@ -1,28 +1,26 @@
 import { Achievement } from "./achievement.js";
-import { MatchSeed } from "./match.js";
+import { Completion, MatchSeed, MatchType, Timeline } from "./match.js";
 
 export type UserIdentifier = string; // uuid, nickname or discord.[snowflake]
 
 export interface UserProfile {
+    /* As per UserProfile specification */
     uuid: string;
     nickname: string;
     roleType: number;
     eloRate: number | null;
     eloRank: number | null;
     country: string | null;
-    seasonResults?: {
-        eloRate: number;
-        eloRank: number | null;
-        phasePoint: number;
-    } | null;
-    predPhasePoint: number;
 }
 
 export interface UserData extends UserProfile {
+    /* As per Get User Data response specification */
     achievements: {display: Achievement[]; total: Achievement[]};
     timestamp: {firstOnline: number; lastOnline: number; lastRanked: number; nextDecay: number | null};
     statistics: UserStatistics;
-    connections: null; // TBI
+    connections: {
+        [key: string]: {id: Connection | null, name: Connection | null};
+    };
     seasonResult: {
         last: {eloRate: number; eloRank: number | null; phasePoint: number};
         highest: number;
@@ -43,7 +41,10 @@ export type UserStatistics = {
         currentWinStreak: {ranked: number | null; casual: number | null}}; 
 }
 
+export type Connection = string;
+
 export interface EloLeaderboardData {
+    /* As per Get Elo Leaderboard response specification */
     season: {
         startsAt: number;
         endsAt: number;
@@ -53,6 +54,7 @@ export interface EloLeaderboardData {
 }
 
 export interface PhaseLeaderboardData {
+    /* As per Get Season Phase Points Leaderboard response specification */
     phase: {
         endsAt: number | null;
         number: number | null;
@@ -62,6 +64,7 @@ export interface PhaseLeaderboardData {
 }
 
 export type RecordLeaderboardDataEntry = {
+    /* As per Get Season Best Time Leaderboard response specification */
     rank: number;
     season: number;
     date: number;
@@ -72,6 +75,7 @@ export type RecordLeaderboardDataEntry = {
 }
 
 export interface RaceLeaderboardData {
+    /* As per Get Weekly Race Leaderboard response specification */
     id: number;
     seed: {
         overworld: string;
@@ -88,3 +92,14 @@ export interface RaceLeaderboardData {
     }[]
 }
 
+export interface PrivateLiveMatchData {
+    /* As per Get User's Live Match Data response specification */
+    lastId: number | null;
+    type: MatchType;
+    status: string;
+    time: number;
+    players: UserProfile[];
+    spectators: UserProfile[];
+    timelines: Timeline[];
+    completions: Completion[];
+}

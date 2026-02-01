@@ -1,4 +1,5 @@
 export interface Achievement {
+    /* As per Achievement specification */
     id: string;
     date: number;
     data: string[];

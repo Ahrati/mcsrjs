@@ -3,29 +3,33 @@ import { UserProfile } from "./user.js";
 export type MatchID = number;
 
 export interface MatchInfo {
+    /* As per MatchInfo specification */
     id: MatchID;
-    type: MatchType | null;
-    seed: MatchSeed;
+    type: MatchType;
+    season: number;
     category: string | null;
-    gameMode: string;
+    date: number;
     players: UserProfile[];
     spectators: UserProfile[];
+    seed: MatchSeed | null;
     result: {uuid: string | null; time: number};
     forfeited: boolean;
     decayed: boolean;
     rank: {season: number | null; allTime: number | null};
-    vod: {uuid: string, url: string; startsAt: number}[];
     changes: {uuid: string; change: number | null; eloRate: number | null}[];
-    beginner: boolean;
-    botSource: null; // not sure
-    date: number;
-    seedType: OverworldType | null;
-    bastionType: NetherType | null;
     tag: string | null;
+    beginner: boolean;
+    vod: {uuid: string, url: string; startsAt: number}[];
     /* advanced */
     completions: Completion[];
     timelines: Timeline[];
     replayExist: boolean;
+
+    /* As gathered from /matches and /matches/{id} */
+    gameMode: string;
+    botSource: null; // not sure
+    seedType: OverworldType | null;
+    bastionType: NetherType | null;
 }
 
 export type Completion = {
@@ -40,7 +44,8 @@ export type Timeline = {
 }
 
 export interface MatchSeed {
-    id: MatchID | null;
+    /* As per MatchSeed specification */
+    id: string | null;
     overworld: OverworldType | null;
     nether: NetherType | null;
     endTowers: number[];
@@ -74,6 +79,7 @@ export const MatchType = {
 export type MatchType = typeof MatchType[keyof typeof MatchType];
 
 export const TimelineType = {
+    /* Gathered from scraping recent matches for TimelineTypes */
     STORY: 'story.root',
     ADVENTURE: 'adventure.root',
     NETHER: 'nether.root',
@@ -126,3 +132,13 @@ export const TimelineType = {
     KILL_DRAGON: 'end.kill_dragon'
 } as const;
 export type TimelineType = typeof TimelineType[keyof typeof TimelineType];
+
+export const MatchStatus = {
+    IDLE: 'idle',
+    COUNTING: 'counting',
+    GENERATE: 'generate',
+    READY: 'ready',
+    RUNNING: 'running',
+    DONE: 'done'
+} as const;
+export type MatchStatus = typeof MatchStatus[keyof typeof MatchStatus];

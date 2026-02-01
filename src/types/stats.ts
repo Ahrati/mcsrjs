@@ -16,6 +16,7 @@ export type VersusChanges = {
 };
 
 export interface VersusData {
+  /* As per Get Versus Stats specification */
   players: UserProfile[];
   results: VersusResults;
   changes: VersusChanges;
@@ -48,6 +49,22 @@ export type SplitTimes = {
   end: number | null;
 }
 
-export interface UserSeasonResultData {
-
+export interface UserSeasonResultData extends UserProfile {
+  seasonResults: {
+    [season: number]: {
+      last: {
+        eloRate: number;
+        eloRank: number | null;
+        phasePoint: number;
+      };
+      highest: number;
+      lowest: number;
+      phases: {
+        phase: number;
+        eloRate: number;
+        eloRank: number;
+        point: number;
+      }[];
+    }
+  }
 }

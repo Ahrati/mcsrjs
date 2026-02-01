@@ -1,4 +1,4 @@
-import { Timeline, TimelineType } from '../types/match.js';
+import { MatchInfo, Timeline, TimelineType } from '../types/match.js';
 import { RankTier } from '../types/other.js';
 import { VersusData, VersusStats } from '../types/stats.js';
 const rankTiers: RankTier[] = [
@@ -87,8 +87,90 @@ export function formatDate(
     return formatted;
 }
 
+export function epoch(
+    date: Date
+) : number {
+    return date.getTime() / 1000;
+}
+
 export function timeOf(
     timelines: Timeline[], type: TimelineType
 ) : number | undefined {
     return timelines.find(t => t.type == type)?.time;
+}
+
+/*
+    matchList does need to be sorted by date descending
+*/
+export function findByDate(
+    matchList: MatchInfo[],
+    date: number
+) { 
+    if (matchList.length === 0) return null;
+
+    var l = 0;
+    var r = matchList.length - 1;
+    
+    while (l <= r) {
+        const mid = (l + r) >> 1;
+        const midDate = matchList[mid].date;
+
+        if (midDate === date) {
+            return matchList[mid];
+        }
+
+        if (midDate > date) {
+            l = mid + 1;
+        } else {
+            r = mid - 1;
+        }
+    }
+
+    if (l >= matchList.length) return matchList[matchList.length - 1];
+    if (r < 0) return matchList[0];
+
+    const newer = matchList[r];
+    const older = matchList[l];
+
+    return Math.abs(newer.date - date) <= Math.abs(older.date - date) ? newer : older;
+}
+
+/*
+    same as findByDate but is reusable for any type of array
+    accepts only numeric keys
+    has to be sorted ascending!! (so if its by date and the matchlist is from users.matchList, you need to reverse list)
+*/
+export function findByKey(
+    matchList: MatchInfo[],
+    key: {[K in keyof MatchInfo]: MatchInfo[K] extends number ? K : never
+        }[keyof MatchInfo],
+    value: number
+) {
+    if (matchList.length === 0) return null;
+
+    var l = 0;
+    var r = matchList.length - 1;
+    
+    while (l <= r) {
+        const mid = (l + r) >> 1;
+        const midValue = matchList[mid][key];
+
+        if (midValue === value) {
+            return matchList[mid];
+        }
+
+        if (midValue < value) {
+            l = mid + 1;
+        } else {
+            r = mid - 1;
+        }
+    }
+
+    if (l >= matchList.length) return matchList[matchList.length - 1];
+    if (r < 0) return matchList[0];
+
+    const newer = matchList[r];
+    const older = matchList[l];
+
+    return Math.abs(newer[key] - value) <= Math.abs(older[key] - value) ? newer : older;
 }

@@ -24,7 +24,7 @@ export class UsersEndpoint extends Client {
 
     matchList(
         identifier: UserIdentifier,
-        options: EndpointParameterOptions = {}
+        options: EndpointParameterOptions = {},
     ) : Promise<MatchInfo[]> {
         const params = setParams(
             ['before', 'after', 'sort', 'count', 'type', 'season', 'excludedecay'],
@@ -32,7 +32,4 @@ export class UsersEndpoint extends Client {
         );
         return this.request<MatchInfo[]>(`/users/${encodeURIComponent(identifier)}/matches?${params}`);
     }
-
-    
-
 }
