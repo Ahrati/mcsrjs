@@ -1,6 +1,6 @@
 {
   "name": "mcsrjs",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "JS/TS module for MCSR API",
   "type": "module",
   "main": "./dist/index.js",
